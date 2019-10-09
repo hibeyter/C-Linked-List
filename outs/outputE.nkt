@@ -1,0 +1,185 @@
+SECIM 1
+Dosya uygun formatta yazilmistir
+SECIM 2
+SECIM 1
+Dosya uygun formatta yazilmistir
+SECIM 3
+1.nokta= x=99.999435 y=99.999435 z=99.999435
+2.nokta= x=0.000279 y=0.000279 z=0.000279
+3.nokta= x=0.000279 y=99.999435 z=99.999435
+4.nokta= x=99.999435 y=0.000279 z=99.999435
+5.nokta= x=99.999435 y=99.999435 z=0.000279
+6.nokta= x=99.999435 y=0.000279 z=0.000279
+7.nokta= x=0.000279 y=99.999435 z=0.000279
+8.nokta= x=0.000279 y=0.000279 z=99.999435
+SECIM 5
+E.nkt dosyasýnda bulunan noktalarýn birbirine olan uzaklýklarýnýn ortalamasý= 0.000000
+!!!! E.nkt dosyasýna ait bilgiler !!!!
+Dosya versiyonu=> 1
+Dosya alanlarý tipi => XYZ formatidir
+Dosyada verilen nokta sayisi=> 84579
+Dosya data tipi=> ASCII
+SECIM 1
+Dosya uygun formatta yazilmistir
+SECIM 2
+en kisa noktalar
+78624. nokta x=73.272888 y=62.921257 z=68.526260
+80460. nokta x=73.263657 y=62.894772 z=68.560982
+en uzak noktalar
+67774. nokta x=0.280636 y=1.759507 z=0.244455
+67790. nokta x=97.406631 y=99.772659 z=99.836319
+SECIM 3
+1.nokta= x=99.999435 y=99.999435 z=99.999435
+2.nokta= x=0.000279 y=0.000279 z=0.000279
+3.nokta= x=0.000279 y=99.999435 z=99.999435
+4.nokta= x=99.999435 y=0.000279 z=99.999435
+5.nokta= x=99.999435 y=99.999435 z=0.000279
+6.nokta= x=99.999435 y=0.000279 z=0.000279
+7.nokta= x=0.000279 y=99.999435 z=0.000279
+8.nokta= x=0.000279 y=0.000279 z=99.999435
+SECIM 4
+cx= 1.000000
+cy= 5.000000
+cz= 9.000000
+cr= 7.000000
+Kure icindeki noktalarin bilgileri: x=3.975508 y=5.413410 z=15.741695
+Kure icindeki noktalarin bilgileri: x=2.121397 y=8.691586 z=11.249862
+Kure icindeki noktalarin bilgileri: x=1.707619 y=5.266483 z=6.281851
+Kure icindeki noktalarin bilgileri: x=6.796025 y=2.531820 z=11.392590
+Kure icindeki noktalarin bilgileri: x=6.484838 y=4.151694 z=5.878450
+Kure icindeki noktalarin bilgileri: x=1.892513 y=4.419921 z=6.443900
+Kure icindeki noktalarin bilgileri: x=4.695360 y=11.545368 z=8.242549
+Kure icindeki noktalarin bilgileri: x=1.122362 y=10.724205 z=15.839422
+Kure icindeki noktalarin bilgileri: x=4.766091 y=5.246623 z=10.726166
+Kure icindeki noktalarin bilgileri: x=5.657956 y=9.280126 z=12.906364
+Kure icindeki noktalarin bilgileri: x=7.751437 y=0.310563 z=13.751305
+Kure icindeki noktalarin bilgileri: x=7.468684 y=11.861255 z=3.617179
+Kure icindeki noktalarin bilgileri: x=4.659643 y=9.085450 z=5.580005
+Kure icindeki noktalarin bilgileri: x=0.039671 y=11.564695 z=13.018141
+Kure icindeki noktalarin bilgileri: x=3.010286 y=0.389987 z=9.955120
+Kure icindeki noktalarin bilgileri: x=6.220062 y=10.277586 z=11.094733
+Kure icindeki noktalarin bilgileri: x=1.389299 y=6.813871 z=12.573448
+Kure icindeki noktalarin bilgileri: x=6.541070 y=10.487623 z=3.605033
+Kure icindeki noktalarin bilgileri: x=1.531025 y=5.445229 z=14.616515
+Kure icindeki noktalarin bilgileri: x=1.458088 y=9.582276 z=14.995200
+Kure icindeki noktalarin bilgileri: x=2.983280 y=11.659585 z=15.467325
+Kure icindeki noktalarin bilgileri: x=3.754410 y=3.891793 z=15.408962
+Kure icindeki noktalarin bilgileri: x=3.537342 y=8.340493 z=2.273101
+Kure icindeki noktalarin bilgileri: x=3.445701 y=8.180385 z=2.759590
+Kure icindeki noktalarin bilgileri: x=0.514982 y=10.433156 z=5.646685
+Kure icindeki noktalarin bilgileri: x=6.716291 y=5.617912 z=6.581335
+Kure icindeki noktalarin bilgileri: x=1.725872 y=5.751298 z=12.405305
+Kure icindeki noktalarin bilgileri: x=3.777779 y=4.848303 z=2.856515
+Kure icindeki noktalarin bilgileri: x=7.108006 y=10.250903 z=8.702223
+Kure icindeki noktalarin bilgileri: x=2.250122 y=1.124664 z=2.086113
+Kure icindeki noktalarin bilgileri: x=3.403796 y=10.028028 z=6.200851
+Kure icindeki noktalarin bilgileri: x=0.470423 y=1.544953 z=8.516827
+Kure icindeki noktalarin bilgileri: x=2.901799 y=11.542054 z=4.458536
+Kure icindeki noktalarin bilgileri: x=1.527318 y=9.915565 z=9.995937
+Kure icindeki noktalarin bilgileri: x=1.368597 y=1.426200 z=7.534773
+Kure icindeki noktalarin bilgileri: x=7.700550 y=4.408830 z=8.898949
+Kure icindeki noktalarin bilgileri: x=7.221419 y=5.073848 z=7.512278
+Kure icindeki noktalarin bilgileri: x=4.117669 y=6.143755 z=5.990078
+Kure icindeki noktalarin bilgileri: x=2.360017 y=10.721410 z=8.222356
+Kure icindeki noktalarin bilgileri: x=7.687661 y=4.812592 z=6.717900
+Kure icindeki noktalarin bilgileri: x=4.454471 y=2.364439 z=8.433300
+Kure icindeki noktalarin bilgileri: x=2.328304 y=8.016078 z=14.248808
+Kure icindeki noktalarin bilgileri: x=2.851845 y=1.302672 z=11.360329
+Kure icindeki noktalarin bilgileri: x=7.538103 y=2.592908 z=15.801024
+Kure icindeki noktalarin bilgileri: x=0.444036 y=5.198110 z=8.943886
+Kure icindeki noktalarin bilgileri: x=0.493000 y=10.807011 z=15.580689
+Kure icindeki noktalarin bilgileri: x=6.071216 y=0.958748 z=3.486772
+Kure icindeki noktalarin bilgileri: x=6.697950 y=3.656098 z=3.628255
+Kure icindeki noktalarin bilgileri: x=3.865381 y=5.320180 z=10.453646
+Kure icindeki noktalarin bilgileri: x=5.765100 y=6.817379 z=14.174498
+Kure icindeki noktalarin bilgileri: x=5.586713 y=10.168623 z=7.091901
+Kure icindeki noktalarin bilgileri: x=4.949507 y=4.510955 z=8.756910
+Kure icindeki noktalarin bilgileri: x=6.165002 y=11.689085 z=15.530296
+Kure icindeki noktalarin bilgileri: x=1.887164 y=3.158424 z=7.902441
+Kure icindeki noktalarin bilgileri: x=7.588079 y=6.722416 z=4.264064
+Kure icindeki noktalarin bilgileri: x=4.783652 y=11.406982 z=7.562905
+Kure icindeki noktalarin bilgileri: x=3.103885 y=0.142363 z=10.251010
+Kure icindeki noktalarin bilgileri: x=4.630801 y=1.142632 z=13.685631
+Kure icindeki noktalarin bilgileri: x=2.015645 y=0.902265 z=5.974588
+Kure icindeki noktalarin bilgileri: x=7.784037 y=0.769483 z=4.550498
+Kure icindeki noktalarin bilgileri: x=5.135546 y=6.142924 z=9.082325
+Kure icindeki noktalarin bilgileri: x=4.941293 y=8.829312 z=4.761203
+Kure icindeki noktalarin bilgileri: x=2.399221 y=4.713554 z=11.519221
+Kure icindeki noktalarin bilgileri: x=0.177207 y=5.730164 z=9.798098
+Kure icindeki noktalarin bilgileri: x=7.768463 y=11.601168 z=12.220072
+Kure icindeki noktalarin bilgileri: x=4.266512 y=4.145458 z=4.991947
+Kure icindeki noktalarin bilgileri: x=5.425303 y=1.635531 z=15.089041
+Kure icindeki noktalarin bilgileri: x=4.998570 y=1.766700 z=11.289360
+Kure icindeki noktalarin bilgileri: x=4.660149 y=11.368697 z=3.638482
+Kure icindeki noktalarin bilgileri: x=4.026093 y=9.809524 z=15.140011
+Kure icindeki noktalarin bilgileri: x=7.509476 y=2.757352 z=4.294899
+Kure icindeki noktalarin bilgileri: x=0.081690 y=1.224907 z=8.724229
+Kure icindeki noktalarin bilgileri: x=2.231105 y=2.309220 z=12.894483
+Kure icindeki noktalarin bilgileri: x=4.581928 y=7.627359 z=13.455721
+Kure icindeki noktalarin bilgileri: x=4.610709 y=6.327688 z=15.465534
+Kure icindeki noktalarin bilgileri: x=7.344327 y=10.037030 z=8.590097
+Kure icindeki noktalarin bilgileri: x=5.828688 y=8.428810 z=7.544354
+Kure icindeki noktalarin bilgileri: x=1.188976 y=9.372881 z=2.196837
+Kure icindeki noktalarin bilgileri: x=1.213319 y=4.815841 z=5.782065
+Kure icindeki noktalarin bilgileri: x=7.717384 y=7.932409 z=13.362301
+Kure icindeki noktalarin bilgileri: x=0.139598 y=8.352564 z=5.940919
+Kure icindeki noktalarin bilgileri: x=4.734078 y=1.715094 z=3.936266
+Kure icindeki noktalarin bilgileri: x=2.545941 y=4.323389 z=9.228734
+Kure icindeki noktalarin bilgileri: x=3.083609 y=6.419783 z=14.853737
+Kure icindeki noktalarin bilgileri: x=4.691584 y=0.303836 z=10.181639
+Kure icindeki noktalarin bilgileri: x=6.524317 y=3.150019 z=8.143042
+Kure icindeki noktalarin bilgileri: x=6.479139 y=5.226735 z=11.035691
+Kure icindeki noktalarin bilgileri: x=2.511277 y=3.708336 z=7.852621
+Kure icindeki noktalarin bilgileri: x=6.221529 y=0.129208 z=13.471531
+Kure icindeki noktalarin bilgileri: x=6.609962 y=0.281581 z=7.008042
+Kure icindeki noktalarin bilgileri: x=1.526898 y=5.392769 z=2.245242
+Kure icindeki noktalarin bilgileri: x=1.303357 y=2.407871 z=14.267838
+Kure icindeki noktalarin bilgileri: x=5.088234 y=1.368578 z=9.369037
+Kure icindeki noktalarin bilgileri: x=5.572130 y=10.737442 z=14.911104
+Kure icindeki noktalarin bilgileri: x=3.981018 y=5.617831 z=13.682384
+Kure icindeki noktalarin bilgileri: x=0.897741 y=0.951011 z=8.311248
+Kure icindeki noktalarin bilgileri: x=6.931057 y=2.847314 z=8.883571
+Kure icindeki noktalarin bilgileri: x=5.252351 y=2.177111 z=4.723254
+Kure icindeki noktalarin bilgileri: x=5.880900 y=2.648989 z=3.194673
+Kure icindeki noktalarin bilgileri: x=7.992393 y=3.883292 z=13.847577
+Kure icindeki noktalarin bilgileri: x=3.234467 y=9.584729 z=6.548114
+Kure icindeki noktalarin bilgileri: x=0.240716 y=10.788320 z=15.664972
+Kure icindeki noktalarin bilgileri: x=6.614208 y=0.149864 z=3.139544
+Kure icindeki noktalarin bilgileri: x=5.081644 y=2.669399 z=13.163605
+Kure icindeki noktalarin bilgileri: x=4.032205 y=7.875192 z=15.261005
+Kure icindeki noktalarin bilgileri: x=2.778998 y=3.294589 z=4.325674
+Kure icindeki noktalarin bilgileri: x=5.714740 y=3.467602 z=8.094338
+Kure icindeki noktalarin bilgileri: x=3.595545 y=2.054824 z=4.378257
+Kure icindeki noktalarin bilgileri: x=1.911517 y=3.259971 z=11.236799
+Kure icindeki noktalarin bilgileri: x=4.905147 y=5.923672 z=7.972995
+Kure icindeki noktalarin bilgileri: x=5.836042 y=1.363330 z=3.416162
+Kure icindeki noktalarin bilgileri: x=3.782344 y=3.679487 z=13.411402
+Kure icindeki noktalarin bilgileri: x=4.258863 y=11.521413 z=9.460942
+Kure icindeki noktalarin bilgileri: x=0.509542 y=9.058030 z=8.924984
+Kure icindeki noktalarin bilgileri: x=1.973763 y=6.327314 z=5.186958
+Kure icindeki noktalarin bilgileri: x=7.633053 y=7.508517 z=13.502019
+Kure icindeki noktalarin bilgileri: x=6.968109 y=9.416603 z=9.354428
+Kure icindeki noktalarin bilgileri: x=5.495357 y=4.156063 z=2.806263
+Kure icindeki noktalarin bilgileri: x=4.234188 y=9.034511 z=2.023559
+Kure icindeki noktalarin bilgileri: x=4.441945 y=1.757067 z=11.759002
+Kure icindeki noktalarin bilgileri: x=7.734481 y=1.304013 z=8.581582
+Kure icindeki noktalarin bilgileri: x=1.616455 y=10.378787 z=12.981219
+Kure icindeki noktalarin bilgileri: x=4.674156 y=1.768633 z=9.515808
+Kure icindeki noktalarin bilgileri: x=7.195253 y=1.876514 z=15.183714
+Kure icindeki noktalarin bilgileri: x=5.408425 y=7.293932 z=5.034704
+Kure icindeki noktalarin bilgileri: x=3.418087 y=7.370950 z=4.945056
+Kure icindeki noktalarin bilgileri: x=1.111953 y=8.571390 z=12.209482
+Kure icindeki noktalarin bilgileri: x=7.577560 y=4.435015 z=5.118374
+Kure icindeki noktalarin bilgileri: x=1.831766 y=2.760812 z=7.853303
+Kure icindeki noktalarin bilgileri: x=0.852955 y=7.931730 z=2.608467
+Kure icindeki noktalarin bilgileri: x=0.927883 y=3.203819 z=7.545842
+Kure icindeki noktalarin bilgileri: x=7.768041 y=1.415468 z=12.516272
+Kure icindeki noktalarin bilgileri: x=7.886210 y=6.169382 z=12.553281
+Kure icindeki noktalarin bilgileri: x=3.141771 y=5.694113 z=6.138591
+SECIM 5
+E.nkt dosyasýnda bulunan noktalarýn birbirine olan uzaklýklarýnýn ortalamasý= 66.144691
+!!!! E.nkt dosyasýna ait bilgiler !!!!
+Dosya versiyonu=> 1
+Dosya alanlarý tipi => XYZ formatidir
+Dosyada verilen nokta sayisi=> 84579
+Dosya data tipi=> ASCII

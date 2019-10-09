@@ -270,9 +270,7 @@ void NearAndRemote(struct File *files){
 		for(j=i+1;j<files->dotSize;j++){
 			float x2=dots[j][0],y2=dots[j][1],z2=dots[j][2];
 			float norm=sqrt(pow((x2-x1),2)+pow((y2-y1),2)+pow((z2-z1),2));
-			normTotal+=norm;
-			//normTotal++;
-			
+			normTotal+=norm;		
 			if(flag){
 				nearNorm=norm;
 				near1.x=x1; near1.y=y1; near1.z=z1; near1.n=i+1;
@@ -295,8 +293,7 @@ void NearAndRemote(struct File *files){
 	fprintf(files->outFile,"en kisa noktalar\n%d. nokta x=%f y=%f z=%f\n",near1.n,near1.x,near1.y,near1.z);
  	fprintf(files->outFile,"%d. nokta x=%f y=%f z=%f\n", near2.n,near2.x,near2.y,near2.z);
     fprintf(files->outFile,"en uzak noktalar\n%d. nokta x=%f y=%f z=%f\n",remote1.n,remote1.x,remote1.y,remote1.z);
- 	fprintf(files->outFile,"%d. nokta x=%f y=%f z=%f\n",remote2.n,remote2.x,remote2.y,remote2.z);
-		
+ 	fprintf(files->outFile,"%d. nokta x=%f y=%f z=%f\n",remote2.n,remote2.x,remote2.y,remote2.z);		
 }
 void Cube(struct File *files){	
 	float dots[files->dotSize][3];
@@ -329,15 +326,15 @@ void Sphere(struct File *files, float x, float y, float z, float r){
 	float dots[files->dotSize][3];		
 	getDots(files,dots);
     for(i=0; i<files->dotSize;i++){
-    	bool aralik=false;
+    	bool range=false;
     	a=x-r;  b=y-r;  c=z-r;
 		a2=r+x; b2=r+y; c2=r+z;	
 	    if(a<dots[i][0] && dots[i][0]<a2){	    
 	    	if(b<dots[i][1] && dots[i][1]<b2){	    		
-	    		if(c<dots[i][2] && dots[i][2]<c2)aralik=true;
+	    		if(c<dots[i][2] && dots[i][2]<c2)range=true;
 			}
 		}  		
-		if(aralik)
+		if(range)
 		fprintf(files->outFile,"Kure icindeki noktalarin bilgileri: x=%f y=%f z=%f\n",dots[i][0],dots[i][1],dots[i][2]);
 	}
 }
