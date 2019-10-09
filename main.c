@@ -47,7 +47,7 @@ void DotDistance(struct File *files);
 
 void getWord(int target, char buffer[200] , char word[25]);
 int getWordSize(char buffer[200]);
-
+void getDots(struct File *files, float dots[files->dotSize][3]);
 
 void Menu(){
 	int parametre;
@@ -258,34 +258,21 @@ void Control(struct File *files){
 	}
 	if(files->flag) fprintf(files->outFile,"Dosya uygun formatta yazilmistir\n");
 }
-void NearAndRemote(struct File *files){
-	char buffer[200], xString[50],yString[50],zString[50];
-	int line=0;
+void NearAndRemote(struct File *files){	
 	float dots[files->dotSize][3];
-	while(fgets(buffer,200,files->readFile)!=NULL){
-		line++;
-		if(line>5){
-			if(files->dataType){
-				sscanf(buffer,"%s %s %s",&xString,&yString,&zString);
-				dots[line-6][0]=atof(xString);
-				dots[line-6][1]=atof(yString);
-				dots[line-6][2]=atof(zString);
-				//	printf("%f %f %f \n",dots[line-6][0],dots[line-6][1],dots[line-6][2]);
-			} 
-			else{
-				// burada float deðerleri binary olarak alacagýz
-			}			
-		}
-	}
+	getDots(files,dots);
 	int i,j;
 	bool flag=true;
-	float nearNorm=0,remoteNorm=0,normTotal=0;
+	float nearNorm=0,remoteNorm=0;
+	double normTotal=0;
 	for(i=0;i<files->dotSize-1;i++){
 		float x1=dots[i][0],y1=dots[i][1],z1=dots[i][2];
 		for(j=i+1;j<files->dotSize;j++){
 			float x2=dots[j][0],y2=dots[j][1],z2=dots[j][2];
-			float norm=	sqrt(pow((x2-x1),2)+pow((y2-y1),2)+pow((z2-z1),2));
+			float norm=sqrt(pow((x2-x1),2)+pow((y2-y1),2)+pow((z2-z1),2));
 			normTotal+=norm;
+			//normTotal++;
+			
 			if(flag){
 				nearNorm=norm;
 				near1.x=x1; near1.y=y1; near1.z=z1; near1.n=i+1;
@@ -304,31 +291,16 @@ void NearAndRemote(struct File *files){
 			}
 		}		
 	}
-	files->distance=(normTotal/(files->dotSize*(files->dotSize-1))/2.0) ;
+	files->distance=(normTotal/(((double)files->dotSize*((double)files->dotSize-1))/2.0)) ;
 	fprintf(files->outFile,"en kisa noktalar\n%d. nokta x=%f y=%f z=%f\n",near1.n,near1.x,near1.y,near1.z);
  	fprintf(files->outFile,"%d. nokta x=%f y=%f z=%f\n", near2.n,near2.x,near2.y,near2.z);
     fprintf(files->outFile,"en uzak noktalar\n%d. nokta x=%f y=%f z=%f\n",remote1.n,remote1.x,remote1.y,remote1.z);
  	fprintf(files->outFile,"%d. nokta x=%f y=%f z=%f\n",remote2.n,remote2.x,remote2.y,remote2.z);
 		
 }
-void Cube(struct File *files){
-	char buffer[200], xString[50],yString[50],zString[50];
-	int line=0;
+void Cube(struct File *files){	
 	float dots[files->dotSize][3];
-	while(fgets(buffer,200,files->readFile)!=NULL){
-		line++;
-		if(line>5){
-			if(files->dataType){
-				sscanf(buffer,"%s %s %s",&xString,&yString,&zString);
-				dots[line-6][0]=atof(xString);
-				dots[line-6][1]=atof(yString);
-				dots[line-6][2]=atof(zString);				
-			} 
-			else{
-				// burada float deðerleri binary olarak alacagýz
-			}			
-		}
-	}
+	getDots(files,dots);
 	float min,max=0;
 	int i ,j;
 	min = dots[0][0];
@@ -349,12 +321,25 @@ void Cube(struct File *files){
 	fprintf(files->outFile,"5.nokta= x=%f y=%f z=%f\n",max,max,min);
 	fprintf(files->outFile,"6.nokta= x=%f y=%f z=%f\n",max,min,min);
 	fprintf(files->outFile,"7.nokta= x=%f y=%f z=%f\n",min,max,min);
-	fprintf(files->outFile,"8.nokta= x=%f y=%f z=%f\n",min,min,max);
-	
-		
+	fprintf(files->outFile,"8.nokta= x=%f y=%f z=%f\n",min,min,max);		
 }
-void Sphere(struct File *files, float x, float y, float z, float r){
-	
+void Sphere(struct File *files, float x, float y, float z, float r){	
+	int i;
+	float a,b,c,a2,b2,c2;	
+	float dots[files->dotSize][3];		
+	getDots(files,dots);
+    for(i=0; i<files->dotSize;i++){
+    	bool aralik=false;
+    	a=x-r;  b=y-r;  c=z-r;
+		a2=r+x; b2=r+y; c2=r+z;	
+	    if(a<dots[i][0] && dots[i][0]<a2){	    
+	    	if(b<dots[i][1] && dots[i][1]<b2){	    		
+	    		if(c<dots[i][2] && dots[i][2]<c2)aralik=true;
+			}
+		}  		
+		if(aralik)
+		fprintf(files->outFile,"Kure icindeki noktalarin bilgileri: x=%f y=%f z=%f\n",dots[i][0],dots[i][1],dots[i][2]);
+	}
 }
 void DotDistance(struct File *files){
 	fprintf(files->outFile,"%s dosyasýnda bulunan noktalarýn birbirine olan uzaklýklarýnýn ortalamasý= %f\n",files->readFileName,files->distance);
@@ -389,6 +374,24 @@ int getWordSize(char buffer[200]){
 		i++;
 	}
 	return wordSize+1;
+}
+void getDots(struct File *files, float dots[files->dotSize][3]){
+	char buffer[200], xString[50],yString[50],zString[50];
+	int line=0;
+	float tempDots[files->dotSize][3];
+	while(fgets(buffer,200,files->readFile)!=NULL){
+		line++;
+		if(files->dataType){
+				sscanf(buffer,"%s %s %s",&xString,&yString,&zString);
+				tempDots[line-6][0]=atof(xString);
+				tempDots[line-6][1]=atof(yString);
+				tempDots[line-6][2]=atof(zString);	
+		}
+		else{
+			// burada float deðerleri binary olarak alacagýz
+		}		
+	}
+	memcpy(dots,tempDots,files->dotSize*3*sizeof(float) );
 }
 int main(void) {
 	FindFiles();
