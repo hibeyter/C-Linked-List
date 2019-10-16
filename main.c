@@ -23,6 +23,7 @@ struct File{
 	float distance;//noktalar arasý uzaklýk ortalamasý
 	int dotSize;//Dosyalarda verilen nokta sayýsý
 	bool dataType;//Dosyalarda verilen data tipi true ise asci false ise binary 
+	bool colorType;//Dosyalardaki renk tiplerinin uygunluðu
 	bool flag;//Dosyalarýn verilen formata uyum kontrolü 
 	struct File * next;	//baðlý listedeki bir sonraki file iþaret eder;
 	
@@ -103,6 +104,7 @@ void Menu(){
 		} break;
 		case 4:{
 			FilesOpen();
+			
 			float x,y,z,r;
 			printf("Kurenin  x degerini giriniz\n");
 			scanf("%f",&x);
@@ -114,6 +116,7 @@ void Menu(){
 			scanf("%f",&r);
 			tempFile=headFile;
 			while(tempFile->next!=NULL){
+				
 				if(tempFile->flag){
 					fprintf(tempFile->outFile,"SECIM 4\n");	
 					fprintf(tempFile->outFile, "cx= %f\ncy= %f\ncz= %f\ncr= %f\n",x,y,z,r);
@@ -132,12 +135,13 @@ void Menu(){
 		case 5:{
 			FilesOpen();			
 			tempFile=headFile;
-			while(tempFile->next!=NULL){				
+			while(tempFile->next!=NULL){
+							
 				if(tempFile->flag){					
 					fprintf(tempFile->outFile,"SECIM 5\n");	
 					DotDistance(tempFile);					
 				}
-				tempFile=tempFile->next;			
+				tempFile=tempFile->next;		
 			}
 			if(tempFile->flag){
 				
@@ -169,7 +173,7 @@ void FindFiles(){
 }
 void AddFile(char fileName[50]){
 	  char outName[50]="outs/output";
-	  char readName[50]="reads/";
+	  char readName[50]="";
 	  strcat(outName,fileName);	
 	  strcat(readName,fileName);
 	  	  		  
@@ -184,6 +188,7 @@ void AddFile(char fileName[50]){
 	  newNode->dotSize=0;
 	  newNode->dataType=true;
 	  newNode->flag=true;
+	  newNode->colorType=false;
 	  newNode->next=NULL;
 	  	  
 	  if(headFile==NULL) headFile=newNode;
@@ -226,7 +231,19 @@ void Control(struct File *files){
 			files->version=atoi(version);
 		}
 		else if(line==3){
-			if(getWordSize(buffer)>4) files->type=false;
+			   char a[25],b[25],c[25];
+			   char free[25];
+			   sscanf(buffer,"%s %s %s %s",free,&a,&b,&c);
+			  if(strcmp(a,"r")==0){
+			  	if(strcmp(b,"g")==0){
+			  		if(strcmp(c,"b")==0){
+			  			files->colorType=true;
+					  }
+				  }
+			  }
+			if(getWordSize(buffer)>4){
+				files->type=false;
+			} 
 		}
 		else if(line==4){
 			char dotSize[25];
@@ -239,19 +256,37 @@ void Control(struct File *files){
 			if(!strcmp("ascii",dataType)) files->dataType=false;
 		}
 		else if(line>5){
-			if(files->type){
-				if(getWordSize(buffer)!=3){
-					fprintf(files->outFile,"%d. satir xyz formatina uygun degildir\n",line-5);
-					files->flag=false;
+			
+				if(files->colorType){
+					int a,b,c;
+					if(getWordSize(buffer) !=3){
+						fprintf(files->outFile,"%d. satir rgb formatina uygun degildir \n",line-5);
+						files->flag=false;
+					}
+					if(files->colorType){
+						sscanf(buffer,"%d %d %d",&a,&b,&c);
+						if(0>a || a>255) fprintf(files->outFile,"%d. satir rgb formatina uygun degildir\n",line-5);
+						if(0>b || b>255) fprintf(files->outFile,"%d. satir rgb formatina uygun degildir\n",line-5);
+						if(0>c || c>255) fprintf(files->outFile,"%d. satir rgb formatina uygun degildir\n",line-5);
+						files->flag=false;
+					}
+				
 				}
-			}else{
-				if(getWordSize(buffer)!=6){
-					fprintf(files->outFile,"%d. satir xyzrgb formatina uygun degildir\n",line-5);
-					files->flag=false;
+				else{
+					if(files->type){
+				       if(getWordSize(buffer)!=3){
+					    fprintf(files->outFile,"%d. satir xyz formatina uygun degildir\n",line-5);
+					    files->flag=false;
+				      }
+			      }else{
+				      if(getWordSize(buffer)!=6){
+					  fprintf(files->outFile,"%d. satir xyzrgb formatina uygun degildir\n",line-5);
+					  files->flag=false;
 				}
 			}
-		}				
-	}	
+    	}
+	}				
+}	
 	if(files->dotSize!=line-5){
 		fprintf(files->outFile,"Formatta verilen nokta sayisi (%d) dosyada verilen nokta sayisi (%d) ile esit degildir.\n",files->dotSize,line-5);
 		files->flag=false;
@@ -339,11 +374,16 @@ void Sphere(struct File *files, float x, float y, float z, float r){
 	}
 }
 void DotDistance(struct File *files){
-	fprintf(files->outFile,"%s dosyasýnda bulunan noktalarýn birbirine olan uzaklýklarýnýn ortalamasý= %f\n",files->readFileName,files->distance);
+	fprintf(files->outFile,"%s dosyasýnda bulunan noktalarýn birbirine olan uzaklýklarýnýn ortalamasý= %f\n\n",files->readFileName,files->distance);
 	fprintf(files->outFile,"!!!! %s dosyasýna ait bilgiler !!!!\n",files->readFileName);
 	fprintf(files->outFile,"Dosya versiyonu=> %d\n",files->version);
-	if(files->type) fprintf(files->outFile,"Dosya alanlarý tipi => XYZ formatidir\n");
-	else fprintf(files->outFile,"Dosya alanlarý tipi => XYZ RGB formatidir\n");
+    if(files->colorType){
+	    fprintf(files->outFile,"Dosya alanlar tipi => RGB formatidir\n");
+	}
+   	else{
+		if(files->type) fprintf(files->outFile,"Dosya alanlarý tipi => XYZ formatidir\n");
+	    else fprintf(files->outFile,"Dosya alanlarý tipi => XYZ RGB formatidir\n");
+	}
 	fprintf(files->outFile,"Dosyada verilen nokta sayisi=> %d\n",files->dotSize);
 	if(files->dataType)fprintf(files->outFile,"Dosya data tipi=> ASCII\n");
 	else fprintf(files->outFile,"Dosya data tipi=> BINARY\n");	

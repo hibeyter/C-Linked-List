@@ -1,0 +1,10 @@
+#Noktalar dosya format
+VERSION 1
+ALANLAR r g b
+NOKTALAR 5
+DATA ascii
+263 12 5
+72 67 61
+82 12 93
+93 185 193
+160 33 152
