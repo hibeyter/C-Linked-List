@@ -1,5 +1,5 @@
 # Noktalar dosya format
-VERSION 1
+VERSION 4
 ALANLAR x y z
 NOKTALAR 380
 DATA ascii

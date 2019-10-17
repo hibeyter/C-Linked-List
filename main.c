@@ -225,8 +225,9 @@ void Control(struct File *files){
 	int line=0;	
 	while(fgets(buffer,200,files->readFile) != NULL){
 		line++;
-		if(line==2){
-			char version[15];
+		 
+	    if(line==2){
+			char version[25];
 			getWord(2,buffer,version);
 			files->version=atoi(version);
 		}
@@ -243,7 +244,7 @@ void Control(struct File *files){
 			  }
 			if(getWordSize(buffer)>4){
 				files->type=false;
-			} 
+			}
 		}
 		else if(line==4){
 			char dotSize[25];
@@ -255,6 +256,7 @@ void Control(struct File *files){
 			getWord(2,buffer,dataType);
 			if(!strcmp("ascii",dataType)) files->dataType=false;
 		}
+		
 		else if(line>5){
 			
 				if(files->colorType){
@@ -265,12 +267,17 @@ void Control(struct File *files){
 					}
 					if(files->colorType){
 						sscanf(buffer,"%d %d %d",&a,&b,&c);
-						if(0>a || a>255) fprintf(files->outFile,"%d. satir rgb formatina uygun degildir\n",line-5);
-						if(0>b || b>255) fprintf(files->outFile,"%d. satir rgb formatina uygun degildir\n",line-5);
-						if(0>c || c>255) fprintf(files->outFile,"%d. satir rgb formatina uygun degildir\n",line-5);
-						files->flag=false;
-					}
-				
+						if(0>a || a>255){
+							fprintf(files->outFile,"%d. satir rgb formatina uygun degildir\n",line-5);files->flag=false;
+						} 
+						if(0>b || b>255){
+							fprintf(files->outFile,"%d. satir rgb formatina uygun degildir\n",line-5);files->flag=false;
+						} 
+						if(0>c || c>255){
+							fprintf(files->outFile,"%d. satir rgb formatina uygun degildir\n",line-5);files->flag=false;
+						} 
+						
+					}	
 				}
 				else{
 					if(files->type){
@@ -285,24 +292,27 @@ void Control(struct File *files){
 				}
 			}
     	}
-	}				
+	}
+						
 }	
 	if(files->dotSize!=line-5){
 		fprintf(files->outFile,"Formatta verilen nokta sayisi (%d) dosyada verilen nokta sayisi (%d) ile esit degildir.\n",files->dotSize,line-5);
 		files->flag=false;
 	}
 	if(files->flag) fprintf(files->outFile,"Dosya uygun formatta yazilmistir\n");
+	else fprintf(files->outFile,"Dosya uygun formatta yazilmamistir\n");
 }
 void NearAndRemote(struct File *files){	
 	float dots[files->dotSize][3];
-	getDots(files,dots);
-	int i,j;
-	bool flag=true;
-	float nearNorm=0,remoteNorm=0;
-	double normTotal=0;
-	for(i=0;i<files->dotSize-1;i++){
+	if(!files->colorType){
+	  getDots(files,dots);
+	  int i,j;
+	  bool flag=true;
+	  float nearNorm=0,remoteNorm=0;
+	  double normTotal=0;
+	  for(i=0;i<files->dotSize-1;i++){
 		float x1=dots[i][0],y1=dots[i][1],z1=dots[i][2];
-		for(j=i+1;j<files->dotSize;j++){
+		 for(j=i+1;j<files->dotSize;j++){
 			float x2=dots[j][0],y2=dots[j][1],z2=dots[j][2];
 			float norm=sqrt(pow((x2-x1),2)+pow((y2-y1),2)+pow((z2-z1),2));
 			normTotal+=norm;		
@@ -322,59 +332,64 @@ void NearAndRemote(struct File *files){
 				remote1.x=x1; remote1.y=y1; remote1.z=z1; remote1.n=i+1;
 				remote2.x=x2; remote2.y=y2; remote2.z=z2; remote2.n=j+1;				
 			}
-		}		
-	}
-	files->distance=(normTotal/(((double)files->dotSize*((double)files->dotSize-1))/2.0)) ;
-	fprintf(files->outFile,"en kisa noktalar\n%d. nokta x=%f y=%f z=%f\n",near1.n,near1.x,near1.y,near1.z);
- 	fprintf(files->outFile,"%d. nokta x=%f y=%f z=%f\n", near2.n,near2.x,near2.y,near2.z);
-    fprintf(files->outFile,"en uzak noktalar\n%d. nokta x=%f y=%f z=%f\n",remote1.n,remote1.x,remote1.y,remote1.z);
- 	fprintf(files->outFile,"%d. nokta x=%f y=%f z=%f\n",remote2.n,remote2.x,remote2.y,remote2.z);		
+		  }		
+	   }
+	   files->distance=(normTotal/(((double)files->dotSize*((double)files->dotSize-1))/2.0)) ;
+	   fprintf(files->outFile,"en yakin noktalar\n%d. nokta x=%f y=%f z=%f\n",near1.n,near1.x,near1.y,near1.z);
+ 	   fprintf(files->outFile,"%d. nokta x=%f y=%f z=%f\n", near2.n,near2.x,near2.y,near2.z);
+       fprintf(files->outFile,"en uzak noktalar\n%d. nokta x=%f y=%f z=%f\n",remote1.n,remote1.x,remote1.y,remote1.z);
+ 	   fprintf(files->outFile,"%d. nokta x=%f y=%f z=%f\n",remote2.n,remote2.x,remote2.y,remote2.z);
+    }
 }
 void Cube(struct File *files){	
 	float dots[files->dotSize][3];
-	getDots(files,dots);
-	float min,max=0;
-	int i ,j;
-	min = dots[0][0];
-	for(i=0;i<files->dotSize;i++){
-		for(j=0;j<3;j++){
+	if(!files->colorType){
+	  getDots(files,dots);
+	  float min,max=0;
+   	  int i ,j;
+	  min = dots[0][0];
+	  for(i=0;i<files->dotSize;i++){
+		 for(j=0;j<3;j++){
 			if(dots[i][j]<min){
-				min=dots[i][j];				
+		 		min=dots[i][j];				
 			}
 			if(dots[i][j]>max){
 				max=dots[i][j];
-			}
+		    }
 		}
 	}
-	fprintf(files->outFile,"1.nokta= x=%f y=%f z=%f\n",max,max,max);
-	fprintf(files->outFile,"2.nokta= x=%f y=%f z=%f\n",min,min,min);
-	fprintf(files->outFile,"3.nokta= x=%f y=%f z=%f\n",min,max,max);
-	fprintf(files->outFile,"4.nokta= x=%f y=%f z=%f\n",max,min,max);
-	fprintf(files->outFile,"5.nokta= x=%f y=%f z=%f\n",max,max,min);
-	fprintf(files->outFile,"6.nokta= x=%f y=%f z=%f\n",max,min,min);
-	fprintf(files->outFile,"7.nokta= x=%f y=%f z=%f\n",min,max,min);
-	fprintf(files->outFile,"8.nokta= x=%f y=%f z=%f\n",min,min,max);		
+	 fprintf(files->outFile,"1.nokta= x=%f y=%f z=%f\n",max,max,max);
+	 fprintf(files->outFile,"2.nokta= x=%f y=%f z=%f\n",min,min,min);
+	 fprintf(files->outFile,"3.nokta= x=%f y=%f z=%f\n",min,max,max);
+	 fprintf(files->outFile,"4.nokta= x=%f y=%f z=%f\n",max,min,max);
+	 fprintf(files->outFile,"5.nokta= x=%f y=%f z=%f\n",max,max,min);
+	 fprintf(files->outFile,"6.nokta= x=%f y=%f z=%f\n",max,min,min);
+	 fprintf(files->outFile,"7.nokta= x=%f y=%f z=%f\n",min,max,min);
+	 fprintf(files->outFile,"8.nokta= x=%f y=%f z=%f\n",min,min,max);
+ }
 }
 void Sphere(struct File *files, float x, float y, float z, float r){	
 	int i;
 	float a,b,c,a2,b2,c2;	
 	float dots[files->dotSize][3];		
-	getDots(files,dots);
-    for(i=0; i<files->dotSize;i++){
-    	bool range=false;
-    	a=x-r;  b=y-r;  c=z-r;
-		a2=r+x; b2=r+y; c2=r+z;	
-	    if(a<dots[i][0] && dots[i][0]<a2){	    
+	if(!files->colorType){
+	  getDots(files,dots);
+      for(i=0; i<files->dotSize;i++){
+    	 bool range=false;
+    	 a=x-r;  b=y-r;  c=z-r;
+		 a2=r+x; b2=r+y; c2=r+z;	
+	     if(a<dots[i][0] && dots[i][0]<a2){	    
 	    	if(b<dots[i][1] && dots[i][1]<b2){	    		
 	    		if(c<dots[i][2] && dots[i][2]<c2)range=true;
 			}
-		}  		
-		if(range)
-		fprintf(files->outFile,"Kure icindeki noktalarin bilgileri: x=%f y=%f z=%f\n",dots[i][0],dots[i][1],dots[i][2]);
-	}
+		 }   		
+		 if(range)
+		 fprintf(files->outFile,"Kure icindeki noktalarin bilgileri: x=%f y=%f z=%f\n",dots[i][0],dots[i][1],dots[i][2]);
+	  }
+   }
 }
 void DotDistance(struct File *files){
-	fprintf(files->outFile,"%s dosyasýnda bulunan noktalarýn birbirine olan uzaklýklarýnýn ortalamasý= %f\n\n",files->readFileName,files->distance);
+	if(!files->colorType)fprintf(files->outFile,"%s dosyasýnda bulunan noktalarýn birbirine olan uzaklýklarýnýn ortalamasý= %f\n\n",files->readFileName,files->distance);
 	fprintf(files->outFile,"!!!! %s dosyasýna ait bilgiler !!!!\n",files->readFileName);
 	fprintf(files->outFile,"Dosya versiyonu=> %d\n",files->version);
     if(files->colorType){

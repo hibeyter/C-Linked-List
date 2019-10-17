@@ -1,9 +1,9 @@
 #Noktalar dosya format
-VERSION 1
+VERSION 6
 ALANLAR r g b
 NOKTALAR 5
 DATA ascii
-263 12 5
+256 12 5
 72 67 61
 82 12 93
 93 185 193
