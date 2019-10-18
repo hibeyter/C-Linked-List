@@ -90,10 +90,10 @@ void Menu(){
 			tempFile=headFile;
 			while(tempFile->next!=NULL){
 				if(tempFile->flag){
-					fprintf(tempFile->outFile,"SECIM 3\n");
-					Cube(tempFile);					
+				   fprintf(tempFile->outFile,"SECIM 3\n");
+				   Cube(tempFile);
 				}
-				tempFile=tempFile->next;			
+				tempFile=tempFile->next;
 			}
 			if(tempFile->flag){
 				fprintf(tempFile->outFile,"SECIM 3\n");
@@ -234,7 +234,7 @@ void Control(struct File *files){
 		else if(line==3){
 			   char a[25],b[25],c[25];
 			   char free[25];
-			   sscanf(buffer,"%s %s %s %s",free,&a,&b,&c);
+			   sscanf(buffer,"%s %s %s %s",free,&a,&b,&c); 
 			  if(strcmp(a,"r")==0){
 			  	if(strcmp(b,"g")==0){
 			  		if(strcmp(c,"b")==0){
@@ -253,12 +253,12 @@ void Control(struct File *files){
 		}
 		else if(line==5){
 			char dataType[25];
-			getWord(2,buffer,dataType);
-			if(!strcmp("ascii",dataType)) files->dataType=false;
+			char free[25];			
+			sscanf(buffer,"%s %s",&free,&dataType);
+			if(strcmp(dataType,"ascii")!=0)	files->dataType=false;			
 		}
 		
-		else if(line>5){
-			
+		else if(line>5){			
 				if(files->colorType){
 					int a,b,c;
 					if(getWordSize(buffer) !=3){
@@ -275,17 +275,19 @@ void Control(struct File *files){
 						} 
 						if(0>c || c>255){
 							fprintf(files->outFile,"%d. satir rgb formatina uygun degildir\n",line-5);files->flag=false;
-						} 
-						
+						} 	
 					}	
 				}
 				else{
-					if(files->type){
+					if(files->dataType==false){
+						
+					}
+					else if(files->type){
 				       if(getWordSize(buffer)!=3){
-					    fprintf(files->outFile,"%d. satir xyz formatina uygun degildir\n",line-5);
-					    files->flag=false;
+					    	fprintf(files->outFile,"%d. satir xyz formatina uygun degildir\n",line-5);
+					   		files->flag=false;
 				      }
-			      }else{
+			       }else{
 				      if(getWordSize(buffer)!=6){
 					  fprintf(files->outFile,"%d. satir xyzrgb formatina uygun degildir\n",line-5);
 					  files->flag=false;
@@ -383,8 +385,8 @@ void Sphere(struct File *files, float x, float y, float z, float r){
 	    		if(c<dots[i][2] && dots[i][2]<c2)range=true;
 			}
 		 }   		
-		 if(range)
-		 fprintf(files->outFile,"Kure icindeki noktalarin bilgileri: x=%f y=%f z=%f\n",dots[i][0],dots[i][1],dots[i][2]);
+		 if(range) fprintf(files->outFile,"Kure icindeki noktalarin bilgileri: x=%f y=%f z=%f\n",dots[i][0],dots[i][1],dots[i][2]);
+	     else fprintf(files->outFile,"Kurenin icinde bir nokta bulunmamaktadir\n");
 	  }
    }
 }
