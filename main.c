@@ -347,7 +347,7 @@ void NearAndRemote(struct File *files){
 				remote2.x=x2; remote2.y=y2; remote2.z=z2; remote2.n=j+1;
 			}
 		  }
-	   }
+	   }	  
 	   files->distance=(normTotal/(((double)files->dotSize*((double)files->dotSize-1))/2.0)) ;
 	   if(files->dataType){
 		   fprintf(files->outFile,"en yakin noktalar\n%d. nokta x=%f y=%f z=%f\n",near1.n,near1.x,near1.y,near1.z);
@@ -402,19 +402,16 @@ void Cube(struct File *files){
 }
 void Sphere(struct File *files, float x, float y, float z, float r){
 	int i;
-	float a,b,c,a2,b2,c2;
+	float a;
 	float dots[files->dotSize][3];
 	bool range;
       getDots(files,dots);
       for(i=0; i<files->dotSize;i++){
-         range=false;
-         a=x-r;  b=y-r;  c=z-r;
-         a2=r+x; b2=r+y; c2=r+z;
-         if(a<dots[i][0] && dots[i][0]<a2){
-            if(b<dots[i][1] && dots[i][1]<b2){
-                if(c<dots[i][2] && dots[i][2]<c2)range=true;
-            }
-         }
+      	 range=false;         
+         a=sqrt(pow(x-dots[i][0],2)+pow(y-dots[i][1],2)+pow(z-dots[i][2],2));
+         if(a<r){
+         	range=true;
+		 }
         if(range){
             if(files->dataType){
                 fprintf(files->outFile,"Kure icindeki noktalarin bilgileri: x=%f y=%f z=%f\n",dots[i][0],dots[i][1],dots[i][2]);
