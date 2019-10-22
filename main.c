@@ -168,10 +168,10 @@ void FindFiles(){
     DIR *dir = opendir(".");
     while ((de = readdir(dir)) != NULL){
     	int i =0;
-
     	char nkt[5];
 		for(i=0;i<4;i++)
 			nkt[i]=de->d_name[strlen(de->d_name)-(4-i)]; // bunun ile sadece  nkt uzantýsýný alabiliriz
+        nkt[4]='\0';
 		if(!strcmp(nkt,".nkt")){
 			AddFile(de->d_name);
 		}
@@ -236,6 +236,10 @@ void Control(struct File *files){
 			char version[25];
 			getWord(2,buffer,version);
 			files->version=atoi(version);
+			if(files->version!=1){
+				fprintf(files->outFile,"Verilen versiyon numarasi hatalidir\n");
+				files->flag=false;
+			}
 		}
 		else if(line==3){
 			 char a[25],b[25],c[25];
@@ -347,7 +351,7 @@ void NearAndRemote(struct File *files){
 				remote2.x=x2; remote2.y=y2; remote2.z=z2; remote2.n=j+1;
 			}
 		  }
-	   }	  
+	   }
 	   files->distance=(normTotal/(((double)files->dotSize*((double)files->dotSize-1))/2.0)) ;
 	   if(files->dataType){
 		   fprintf(files->outFile,"en yakin noktalar\n%d. nokta x=%f y=%f z=%f\n",near1.n,near1.x,near1.y,near1.z);
@@ -407,7 +411,7 @@ void Sphere(struct File *files, float x, float y, float z, float r){
 	bool range;
       getDots(files,dots);
       for(i=0; i<files->dotSize;i++){
-      	 range=false;         
+      	 range=false;
          a=sqrt(pow(x-dots[i][0],2)+pow(y-dots[i][1],2)+pow(z-dots[i][2],2));
          if(a<r){
          	range=true;
@@ -499,3 +503,4 @@ int main(void) {
 	}
 
 }
+
