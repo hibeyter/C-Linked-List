@@ -39,7 +39,7 @@ struct Dot near1;
 struct Dot near2;
 struct Dot remote1;
 struct Dot remote2;
-
+bool forced=false;
 void Menu();
 void FindFiles();
 void AddFile(char fileName[50]);
@@ -61,6 +61,7 @@ void Menu(){
 	scanf("%d",&parametre);
 	switch(parametre){
 		case 1:{
+			forced=true;
 			FilesOpen();
 			tempFile=headFile;
 			while(tempFile->next!=NULL){
@@ -74,88 +75,105 @@ void Menu(){
 			Menu();
 		} break;
 		case 2:{
-			FilesOpen();
-			tempFile=headFile;
-			while(tempFile->next!=NULL){
+			if(forced){
+				FilesOpen();
+				tempFile=headFile;
+				while(tempFile->next!=NULL){
+					if(tempFile->flag){
+						fprintf(tempFile->outFile,"SECIM 2\n");
+						NearAndRemote(tempFile);
+					}
+					tempFile=tempFile->next;
+				}
 				if(tempFile->flag){
 					fprintf(tempFile->outFile,"SECIM 2\n");
 					NearAndRemote(tempFile);
 				}
-				tempFile=tempFile->next;
+				FilesClose();
+			}else{
+				printf("Lutfen once dosya kontolu yapiniz\n");
 			}
-			if(tempFile->flag){
-				fprintf(tempFile->outFile,"SECIM 2\n");
-				NearAndRemote(tempFile);
-			}
-			FilesClose();
 			Menu();
 		}break;
 		case 3:{
-			FilesOpen();
-			tempFile=headFile;
-			while(tempFile->next!=NULL){
-				if(tempFile->flag){
-				   fprintf(tempFile->outFile,"SECIM 3\n");
-				   Cube(tempFile);
+			if(forced){
+				FilesOpen();
+				tempFile=headFile;
+				while(tempFile->next!=NULL){
+					if(tempFile->flag){
+					   fprintf(tempFile->outFile,"SECIM 3\n");
+					   Cube(tempFile);
+					}
+					tempFile=tempFile->next;
 				}
-				tempFile=tempFile->next;
+				if(tempFile->flag){
+					fprintf(tempFile->outFile,"SECIM 3\n");
+					Cube(tempFile);
+				}
+				FilesClose();
+			}else{
+				printf("Lutfen once dosya kontolu yapiniz\n");
 			}
-			if(tempFile->flag){
-				fprintf(tempFile->outFile,"SECIM 3\n");
-				Cube(tempFile);
-			}
-			FilesClose();
 			Menu();
 		} break;
 		case 4:{
-			FilesOpen();
+			if(forced){
+				FilesOpen();
+				float x,y,z,r;
+				printf("Kurenin  x degerini giriniz\n");
+				scanf("%f",&x);
+				printf("Kurenin  y degerini giriniz\n");
+				scanf("%f",&y);
+				printf("Kurenin  z degerini giriniz\n");
+				scanf("%f",&z);
+				printf("Kurenin  yaricapini giriniz\n");
+				scanf("%f",&r);
+				tempFile=headFile;
+				while(tempFile->next!=NULL){
 
-			float x,y,z,r;
-			printf("Kurenin  x degerini giriniz\n");
-			scanf("%f",&x);
-			printf("Kurenin  y degerini giriniz\n");
-			scanf("%f",&y);
-			printf("Kurenin  z degerini giriniz\n");
-			scanf("%f",&z);
-			printf("Kurenin  yaricapini giriniz\n");
-			scanf("%f",&r);
-			tempFile=headFile;
-			while(tempFile->next!=NULL){
-
+					if(tempFile->flag){
+						fprintf(tempFile->outFile,"SECIM 4\n");
+						fprintf(tempFile->outFile, "cx= %f\ncy= %f\ncz= %f\ncr= %f\n",x,y,z,r);
+						Sphere(tempFile,x,y,z,r);
+					}
+					tempFile=tempFile->next;
+				}
 				if(tempFile->flag){
 					fprintf(tempFile->outFile,"SECIM 4\n");
 					fprintf(tempFile->outFile, "cx= %f\ncy= %f\ncz= %f\ncr= %f\n",x,y,z,r);
 					Sphere(tempFile,x,y,z,r);
 				}
-				tempFile=tempFile->next;
+				FilesClose();
+			}else{
+				printf("Lutfen once dosya kontolu yapiniz\n");
 			}
-			if(tempFile->flag){
-				fprintf(tempFile->outFile,"SECIM 4\n");
-				fprintf(tempFile->outFile, "cx= %f\ncy= %f\ncz= %f\ncr= %f\n",x,y,z,r);
-				Sphere(tempFile,x,y,z,r);
-			}
-			FilesClose();
 			Menu();
 		} break;
 		case 5:{
-			FilesOpen();
-			tempFile=headFile;
-			while(tempFile->next!=NULL){
+			if(forced){
+				FilesOpen();
+				tempFile=headFile;
+				while(tempFile->next!=NULL){
 
+					if(tempFile->flag){
+						fprintf(tempFile->outFile,"SECIM 5\n");
+						DotDistance(tempFile);
+					}
+					tempFile=tempFile->next;
+				}
 				if(tempFile->flag){
+
 					fprintf(tempFile->outFile,"SECIM 5\n");
 					DotDistance(tempFile);
 				}
-				tempFile=tempFile->next;
+				FilesClose();
+				printf("Butun islemler tamamlandi output dosyalarini kontrol edebilirsin....");
+				exit(1);
+			}else{
+				printf("Lutfen once dosya kontolu yapiniz\n");
+				Menu();
 			}
-			if(tempFile->flag){
 
-				fprintf(tempFile->outFile,"SECIM 5\n");
-				DotDistance(tempFile);
-			}
-			FilesClose();
-			printf("Butun islemler tamamlandi output dosyalarini kontrol edebilirsin....");
-			exit(1);
 		} break;
 		default: {
 			printf("!!! Lutfen Gecerli Bir Deger Giriniz !!!\n ");
@@ -209,11 +227,11 @@ void AddFile(char fileName[50]){
 void FilesOpen(){
 	tempFile=headFile;
 	while(tempFile->next!=NULL){
-		tempFile->readFile=fopen(tempFile->readFileName,"rb");
+		tempFile->readFile=fopen(tempFile->readFileName,"r");
 		tempFile->outFile=fopen(tempFile->outFileName,"a");
 		tempFile=tempFile->next;
 	}
-	tempFile->readFile=fopen(tempFile->readFileName,"rb");
+	tempFile->readFile=fopen(tempFile->readFileName,"r");
 	tempFile->outFile=fopen(tempFile->outFileName,"a");
 }
 void FilesClose(){
@@ -354,7 +372,7 @@ void NearAndRemote(struct File *files){
 	   }
 	   files->distance=(normTotal/(((double)files->dotSize*((double)files->dotSize-1))/2.0)) ;
 	   if(files->dataType){
-		   fprintf(files->outFile,"en yakin noktalar\n%d. nokta x=%f y=%f z=%f\n",near1.n,near1.x,near1.y,near1.z);
+	   	   fprintf(files->outFile,"en yakin noktalar\n%d. nokta x=%f y=%f z=%f\n",near1.n,near1.x,near1.y,near1.z);
 	 	   fprintf(files->outFile,"%d. nokta x=%f y=%f z=%f\n", near2.n,near2.x,near2.y,near2.z);
 	       fprintf(files->outFile,"en uzak noktalar\n%d. nokta x=%f y=%f z=%f\n",remote1.n,remote1.x,remote1.y,remote1.z);
 	 	   fprintf(files->outFile,"%d. nokta x=%f y=%f z=%f\n",remote2.n,remote2.x,remote2.y,remote2.z);
@@ -365,6 +383,10 @@ void NearAndRemote(struct File *files){
 	   		fwrite(&remote2, sizeof(struct Dot), 1, files->outFile);
 	   		fprintf(files->outFile,"\n");
 	   }
+
+
+
+
 }
 void Cube(struct File *files){
 	float dots[files->dotSize][3];
@@ -382,27 +404,29 @@ void Cube(struct File *files){
 		    }
 		}
 	}
-	if(files->dataType){
-		 fprintf(files->outFile,"1.nokta= x=%f y=%f z=%f\n",max,max,max);
-		 fprintf(files->outFile,"2.nokta= x=%f y=%f z=%f\n",min,min,min);
-		 fprintf(files->outFile,"3.nokta= x=%f y=%f z=%f\n",min,max,max);
-		 fprintf(files->outFile,"4.nokta= x=%f y=%f z=%f\n",max,min,max);
-		 fprintf(files->outFile,"5.nokta= x=%f y=%f z=%f\n",max,max,min);
-		 fprintf(files->outFile,"6.nokta= x=%f y=%f z=%f\n",max,min,min);
-		 fprintf(files->outFile,"7.nokta= x=%f y=%f z=%f\n",min,max,min);
-		 fprintf(files->outFile,"8.nokta= x=%f y=%f z=%f\n",min,min,max);
-	}
-	else{
-		fwrite(&max, sizeof(float), 1, files->outFile);fwrite(&max, sizeof(float), 1, files->outFile);fwrite(&max, sizeof(float), 1, files->outFile);
-		fwrite(&min, sizeof(float), 1, files->outFile);fwrite(&min, sizeof(float), 1, files->outFile);fwrite(&min, sizeof(float), 1, files->outFile);
-		fwrite(&min, sizeof(float), 1, files->outFile);fwrite(&max, sizeof(float), 1, files->outFile);fwrite(&max, sizeof(float), 1, files->outFile);
-		fwrite(&max, sizeof(float), 1, files->outFile);fwrite(&min, sizeof(float), 1, files->outFile);fwrite(&max, sizeof(float), 1, files->outFile);
-		fwrite(&max, sizeof(float), 1, files->outFile);fwrite(&max, sizeof(float), 1, files->outFile);fwrite(&min, sizeof(float), 1, files->outFile);
-		fwrite(&max, sizeof(float), 1, files->outFile);fwrite(&min, sizeof(float), 1, files->outFile);fwrite(&min, sizeof(float), 1, files->outFile);
-		fwrite(&min, sizeof(float), 1, files->outFile);fwrite(&max, sizeof(float), 1, files->outFile);fwrite(&min, sizeof(float), 1, files->outFile);
-		fwrite(&min, sizeof(float), 1, files->outFile);fwrite(&min, sizeof(float), 1, files->outFile);fwrite(&max, sizeof(float), 1, files->outFile);
-		fprintf(files->outFile,"\n");
-	}
+		if(files->dataType){
+		 fprintf(files->outFile,"1.nokta= x=%f y=%f z=%f\n",min,min,min);
+		 fprintf(files->outFile,"2.nokta= x=%f y=%f z=%f\n",min,min,max);
+		 fprintf(files->outFile,"3.nokta= x=%f y=%f z=%f\n",min,max,min);
+		 fprintf(files->outFile,"4.nokta= x=%f y=%f z=%f\n",min,max,max);
+		 fprintf(files->outFile,"5.nokta= x=%f y=%f z=%f\n",max,min,min);
+		 fprintf(files->outFile,"6.nokta= x=%f y=%f z=%f\n",max,min,max);
+		 fprintf(files->outFile,"7.nokta= x=%f y=%f z=%f\n",max,max,min);
+		 fprintf(files->outFile,"8.nokta= x=%f y=%f z=%f\n",max,max,max);
+		}else{
+			fwrite(&max, sizeof(float), 1, files->outFile);fwrite(&max, sizeof(float), 1, files->outFile);fwrite(&max, sizeof(float), 1, files->outFile);
+			fwrite(&min, sizeof(float), 1, files->outFile);fwrite(&min, sizeof(float), 1, files->outFile);fwrite(&min, sizeof(float), 1, files->outFile);
+			fwrite(&min, sizeof(float), 1, files->outFile);fwrite(&max, sizeof(float), 1, files->outFile);fwrite(&max, sizeof(float), 1, files->outFile);
+			fwrite(&max, sizeof(float), 1, files->outFile);fwrite(&min, sizeof(float), 1, files->outFile);fwrite(&max, sizeof(float), 1, files->outFile);
+			fwrite(&max, sizeof(float), 1, files->outFile);fwrite(&max, sizeof(float), 1, files->outFile);fwrite(&min, sizeof(float), 1, files->outFile);
+			fwrite(&max, sizeof(float), 1, files->outFile);fwrite(&min, sizeof(float), 1, files->outFile);fwrite(&min, sizeof(float), 1, files->outFile);
+			fwrite(&min, sizeof(float), 1, files->outFile);fwrite(&max, sizeof(float), 1, files->outFile);fwrite(&min, sizeof(float), 1, files->outFile);
+			fwrite(&min, sizeof(float), 1, files->outFile);fwrite(&min, sizeof(float), 1, files->outFile);fwrite(&max, sizeof(float), 1, files->outFile);
+			fprintf(files->outFile,"\n");
+		}
+
+
+
 }
 void Sphere(struct File *files, float x, float y, float z, float r){
 	int i;
@@ -413,18 +437,18 @@ void Sphere(struct File *files, float x, float y, float z, float r){
       for(i=0; i<files->dotSize;i++){
       	 range=false;
          a=sqrt(pow(x-dots[i][0],2)+pow(y-dots[i][1],2)+pow(z-dots[i][2],2));
-         if(a<r){
+         if(a<=r){
          	range=true;
 		 }
         if(range){
-            if(files->dataType){
-                fprintf(files->outFile,"Kure icindeki noktalarin bilgileri: x=%f y=%f z=%f\n",dots[i][0],dots[i][1],dots[i][2]);
-            }else{
-                fwrite(&dots[i][0], sizeof(float), 1, files->outFile);
+			if(files->dataType){
+				 fprintf(files->outFile,"Kure icindeki noktalarin bilgileri: x=%f y=%f z=%f\n",dots[i][0],dots[i][1],dots[i][2]);
+			}else{
+				fwrite(&dots[i][0], sizeof(float), 1, files->outFile);
                 fwrite(&dots[i][1], sizeof(float), 1, files->outFile);
                 fwrite(&dots[i][2], sizeof(float), 1, files->outFile);
                 fprintf(files->outFile,"\n");
-            }
+			}
         }
      }
     fprintf(files->outFile,"!!!! %s dosyasýna ait bilgiler !!!!\n",files->readFileName);
